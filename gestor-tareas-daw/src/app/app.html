@@ -1,0 +1,32 @@
+<div class="contenedor">
+
+  <h1>Lista de tareas</h1>
+
+  <form (submit)="agregarTarea(); $event.preventDefault()">
+    <input type="text" placeholder="Escribe una nueva tarea" [value]="nuevaTarea()"
+      (input)="nuevaTarea.set($any($event.target).value)">
+
+    <button type="submit">
+      Añadir tarea
+    </button>
+  </form>
+
+  <div class="lista">
+
+    @for (tarea of tareas(); track $index) {
+
+    <app-tarea-item [tarea]="tarea" [indice]="$index" (onEliminar)="eliminarTarea($event)">
+    </app-tarea-item>
+
+    }
+    @empty {
+
+    <p class="vacio">
+      No quedan tareas pendientes.
+    </p>
+
+    }
+
+  </div>
+
+</div>
